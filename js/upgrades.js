@@ -42,7 +42,6 @@ const UPGS = {
             let start = upg.start
             let lvl = player.massUpg[i]||E(0)
             let cost, bulk = E(0), fp
-
             if (i==4) {
                 if (hasInfUpgrade(2)) start = E(1e10)
                 let pow = 1.5
@@ -50,14 +49,13 @@ const UPGS = {
                 if (player.mass.gte(Decimal.pow(10,start))) bulk = player.mass.max(1).log10().div(start).max(1).log(inc).max(0).root(pow).scaleEvery('massUpg4',true).add(1).floor()
             } else {
                 fp = tmp.massFP
-                
                 if (i == 1 && player.ranks.rank.gte(2)) inc = inc.pow(0.8)
                 if (i == 2 && player.ranks.rank.gte(3)) inc = inc.pow(0.8)
                 if (i == 3 && player.ranks.rank.gte(4)) inc = inc.pow(0.8)
                 if (player.ranks.tier.gte(3)) inc = inc.pow(0.8)
-                cost = inc.pow(lvl.div(fp).scaleEvery("massUpg")).mul(start)
+                cost = inc.pow(lvl.div(i==5?1:fp).scaleEvery("massUpg")).mul(start)
                 bulk = E(0)
-                if (player.mass.gte(start)) bulk = player.mass.div(start).max(1).log(inc).scaleEvery("massUpg",true).mul(fp).add(1).floor()
+                if (player.mass.gte(start)) bulk = player.mass.div(start).max(1).log(inc).scaleEvery("massUpg",true).mul(i==5?1:fp).add(1).floor()
             }
         
             return {cost: cost, bulk: bulk}

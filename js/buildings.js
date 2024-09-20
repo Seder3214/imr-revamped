@@ -957,7 +957,7 @@ function getMassUpgradeCost(i, lvl) {
         if (i == 2 && player.ranks.rank.gte(3)) inc = inc.pow(0.8)
         if (i == 3 && player.ranks.rank.gte(4)) inc = inc.pow(0.8)
         if (player.ranks.tier.gte(3)) inc = inc.pow(0.8)
-        cost = inc.pow(lvl.div(fp).scaleEvery("massUpg")).mul(start)
+        cost = inc.pow(lvl.div(i==5?1:fp).scaleEvery("massUpg")).mul(start)
     }
 
     return cost
@@ -980,7 +980,7 @@ function getMassUpgradeBulk(i) {
         if (i == 3 && player.ranks.rank.gte(4)) inc = inc.pow(0.8)
         if (player.ranks.tier.gte(3)) inc = inc.pow(0.8)
 
-        if (player.mass.gte(start)) bulk = player.mass.div(start).max(1).log(inc).scaleEvery("massUpg",true).mul(fp).add(1).floor()
+        if (player.mass.gte(start)) bulk = player.mass.div(start).max(1).log(inc).scaleEvery("massUpg",true).mul(i==5?1:fp).add(1).floor()
     }
 
     return bulk

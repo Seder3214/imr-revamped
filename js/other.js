@@ -43,6 +43,13 @@ const POPUP_GROUPS = {
     help: {
         html: `
         <h1>Mass</h1><br>
+        zg (zeptogram): 1e-21 g<br>
+        ag (attogram): 1e-18 g<br>
+        fg (femtogram): 1e-15 g<br>
+        pg (picogram): 1e-12 g<br>
+        ng (nanogram): 1e-9 g<br>
+        mkg (microgram): 0.000001 g<br>
+        mg (milligram): 0.001 g<br>
         g (gram): 1 g<br>
         kg (kilogram): 1,000 g<br>
         tonne (tonne): 1,000 kg = 1,000,000 g<br>
