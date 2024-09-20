@@ -49,9 +49,8 @@ const FORMS = {
         if (hascUpg(0)) x = x.mul(cUpgEff(0).eff2)
         return x
     },
-    liftPower() {
-        let x = E(10).mul(player.liftingPower.add(1).pow(1.75))
-        if (player.liftingPower.gte(15)) x=x.pow(1.15)
+    liftPower(y=player.liftingPower) {
+        let x = Decimal.pow(10,y.root(1.75).root((player.liftingPower.gte(15)?1.15:1)))
         return x
     },
     expGain() {
@@ -766,7 +765,14 @@ const ARV = ['mlt','mgv','giv','tev','pev','exv','zev','yov']
 function formatMass(ex) {
     let md = player.options.massDis
     ex = E(ex)
-    if (md == 1) return format(ex) + ' g'
+    if (md == 1) {if (ex.gte(1)) return format(ex) + "g"
+        if (ex.eq(0)) return format(0) + "g"
+        if (ex.gte(1/1e4)) return format(ex*1e4) + ' mg'
+        if (ex.gte(1/1e6)) return format(ex*1e6) + ' mkg'
+        if (ex.gte(1/1e9)) return format(ex*1e9) + ' ng'
+        if (ex.gte(1/1e12)) return format(ex*1e12) + ' pg'
+        if (ex.gte(1/1e21)) return format(ex*1e21) + ' zg'
+        if (ex.gte(1/1e32)) return format(ex) + ' g'}
     else if (md == 2) return format(ex.div(1.5e56).max(1).log10().div(1e9)) + ' mlt'
     else if (md == 3) {
         return  ex.gte('ee14979') ? formatARV(ex) : ex.gte('1.5e1000000056') ? format(ex.div(1.5e56).max(1).log10().div(1e9)) + ' mlt' : format(ex) + ' g'

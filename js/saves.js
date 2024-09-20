@@ -93,10 +93,10 @@ function calc(dt) {
             player.mass = player.mass.add(tmp.massGain.mul(liftAmt))
             player.ticker=E(0)
          }
-         if (player.exp.gte(tmp.liftPower)) {
-            player.liftingPower = player.liftingPower.add(1)
-            player.exp=player.exp.sub(tmp.liftPower)
-         }
+            let x = player.exp.max(1).log(10).pow(1.75).pow(player.liftingPower.gte(15)?1.15:1).add(1).floor()
+            if (player.exp.gte(tmp.liftPower)) {
+            player.liftingPower = x
+            }
 
         if (!tmp.brokenInf) player.mass = player.mass.min(tmp.inf_limit)
         
