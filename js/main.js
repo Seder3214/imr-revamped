@@ -766,7 +766,6 @@ function formatMass(ex) {
     let md = player.options.massDis
     ex = E(ex)
     if (md == 1) {if (ex.gte(1)) return format(ex) + "g"
-        if (ex.eq(0)) return format(0) + "g"
         if (ex.gte(1/1e4)) return format(ex*1e4) + ' mg'
         if (ex.gte(1/1e6)) return format(ex*1e6) + ' mkg'
         if (ex.gte(1/1e9)) return format(ex*1e9) + ' ng'
@@ -774,7 +773,7 @@ function formatMass(ex) {
         if (ex.gte(1/1e15)) return format(ex*1e15) + ' fg'
         if (ex.gte(1/1e18)) return format(ex*1e18) + ' ag'
         if (ex.gte(1/1e21)) return format(ex*1e21) + ' zg'
-        if (ex.gte(1/1e32)) return format(ex) + ' g'}
+    }
     else if (md == 2) return format(ex.div(1.5e56).max(1).log10().div(1e9)) + ' mlt'
     else if (md == 3) {
         return  ex.gte('ee14979') ? formatARV(ex) : ex.gte('1.5e1000000056') ? format(ex.div(1.5e56).max(1).log10().div(1e9)) + ' mlt' : format(ex) + ' g'
@@ -795,9 +794,9 @@ function formatMass(ex) {
     if (ex.gte(1/1e9)) return format(ex*1e9) + ' ng'
     if (ex.gte(1/1e12)) return format(ex*1e12) + ' pg'
     if (ex.gte(1/1e15)) return format(ex*1e15) + ' fg'
-     if (ex.gte(1/1e18)) return format(ex*1e18) + ' ag'
+    if (ex.gte(1/1e18)) return format(ex*1e18) + ' ag'
     if (ex.gte(1/1e21)) return format(ex*1e21) + ' zg'
-    if (ex.gte(1/1e32)) return format(ex) + ' g'
+    if (ex.gt(1/1e21)) return format(ex*1e21) + ' g'
 }
 
 function getMltValue(mass){
