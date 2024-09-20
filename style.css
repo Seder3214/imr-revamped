@@ -302,14 +302,15 @@ button {
 	cursor: default;
 }
 .cUpg:not(.locked):not(.bought):hover {
-	border-color: #4772ff;
-	background-color: #00dbbe !important;
-	box-shadow: 2px 2px 6px #4781ff, 2px 2px 6px #4772ff inset, -2px -2px 6px white, -2px -2px 6px white inset;
+	border-color: #47ff50;
+	background-color: #00db1d !important;
+	box-shadow: 2px 2px 6px #47ff47, 2px 2px 6px #56ff47 inset, -2px -2px 6px white, -2px -2px 6px white inset;
 	color: black;
 }
 .cUpg.bought {
-	border-color: #4772ff;
-	background-color: #171717;
+	border-color: #4dff47;
+	background-color: #0c3615;
+	cursor: not-allowed;
 }
 @keyframes corrupted_text {
 	0%, 100% {
