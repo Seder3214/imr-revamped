@@ -93,7 +93,8 @@ function calc(dt) {
             player.mass = player.mass.add(tmp.massGain.mul(liftAmt))
             player.ticker=E(0)
          }
-            let x = player.exp.max(1).log(10).pow(1.75).pow(player.liftingPower.gte(15)?1.15:1).root(player.liftingPower.gte(1e9)?1.65:1).add(1).floor()
+         let x = E(0)
+            x = player.exp.max(1).log(10).pow(1.75).root(player.liftingPower.gte(15)||x.gte(15)?1.15:1).root(player.liftingPower.gte(1e9)||x.gte(1e9)?1.65:1).root((player.liftingPower.gte(1e25)||x.gte(1e25)?1.25:1)).root((player.liftingPower.gte(1e50)||x.gte(1e50)?1.5:1)).root((player.liftingPower.gte(1e100)||x.gte(1e100)?1.425:1)).root((player.liftingPower.gte(1e200)||x.gte(1e200)?1.225:1)).add(1).floor()
             if (player.exp.gte(tmp.liftPower)) {
             player.liftingPower = x
             }

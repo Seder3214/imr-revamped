@@ -50,7 +50,7 @@ const FORMS = {
         return x
     },
     liftPower(y=player.liftingPower) {
-        let x = Decimal.pow(10,y.root(1.75).root((player.liftingPower.gte(15)?1.15:1)).pow((player.liftingPower.gte(1e9)?1.65:1)))
+        let x = Decimal.pow(10,y.root(1.75).pow((player.liftingPower.gte(15)?1.15:1)).pow((player.liftingPower.gte(1e9)?1.65:1)).pow((player.liftingPower.gte(1e25)?1.25:1)).pow((player.liftingPower.gte(1e50)?1.5:1)).pow((player.liftingPower.gte(1e100)?1.425:1)).pow((player.liftingPower.gte(1e200)?1.225:1)))
         return x
     },
     expGain() {
@@ -773,6 +773,7 @@ function formatMass(ex) {
         if (ex.gte(1/1e15)) return format(ex*1e15) + ' fg'
         if (ex.gte(1/1e18)) return format(ex*1e18) + ' ag'
         if (ex.gte(1/1e21)) return format(ex*1e21) + ' zg'
+        else return format(ex) + ' g'
     }
     else if (md == 2) return format(ex.div(1.5e56).max(1).log10().div(1e9)) + ' mlt'
     else if (md == 3) {

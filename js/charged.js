@@ -91,7 +91,8 @@ const ChargedUPGS = {
         let unl=ChargedUPGS.unl()
         let c = ChargedUPGS.upgs[i], id = `cUpg${i}`
         tmp.el[id+"_div"].setDisplay(i<unl)
-        tmp.el[id+"_cost"].setHTML(!hascUpg(i)?`Cost: <b>`+formatMass(c.cost)+`</b>.`:"Upgrade bought!")
+        tmp.el[id+"_cost"].setDisplay(!hascUpg(i))
+        tmp.el[id+"_cost"].setHTML(`Cost: <b>`+formatMass(c.cost)+`</b>.`)
         tmp.el[id+"_desc"].setHTML(`${c.desc}`+`${c.effDesc?c.effDesc():""}`)
     
         tmp.el[id+"_div"].setClasses({btn: true, full: true, cUpg: true, locked:  player.mass.lt(c.cost) && !hascUpg(i), bought: hascUpg(i)})

@@ -487,7 +487,7 @@ button {
 
 .btn_tree:not(.locked):not(.bought):hover,
 .elements:not(.locked):not(.bought):not(.final):hover,
-.btn:not(.locked):not(.md):not(.galactic):hover,
+.btn:not(.locked):not(.md):not(.galactic):not(.bought):hover,
 .img_btn:not(.locked):not(.bought):hover {
 	background-color: #555
 }
