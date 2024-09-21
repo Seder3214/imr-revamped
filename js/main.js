@@ -798,6 +798,7 @@ function formatMass(ex) {
     if (ex.gte(1/1e18)) return format(ex*1e18) + ' ag'
     if (ex.gte(1/1e21)) return format(ex*1e21) + ' zg'
     if (ex.gt(1/1e21)) return format(ex*1e21) + ' g'
+else return format(ex*1e21) + 'g'
 }
 
 function getMltValue(mass){
