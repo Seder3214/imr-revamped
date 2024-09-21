@@ -75,7 +75,7 @@ const ChargedUPGS = {
             h += `
             <button onclick="ChargedUPGS.buyUpg(${i})" class="btn full cUpg" id="cUpg${i}_div" style="font-size: 11px;">
                 <h4>[Upgrade ${c.row+(E(i).add(1))}]</h4><br>
-                <span id="cUpg${i}_desc">${c.desc}</span>
+                <span id="cUpg${i}_desc">${c.desc}</span><br>
                 <span id="cUpg${i}_cost"></span>
             </button>
             `
