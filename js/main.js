@@ -61,7 +61,7 @@ const FORMS = {
     LiftPowerEff() {
         let x = E(1)
         x=E(1.154).pow(player.liftingPower.pow(1.278))
-        return x.max(1).softcap(100,0.35,0)
+        return x.max(1).softcap(100,0.405,0)
     },
     massGain() {
         let x = E(1/1e21)
