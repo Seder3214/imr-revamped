@@ -889,6 +889,7 @@ const BUILDINGS = {
 
     //Effect
 	eff(i, key="effect", def = E(1)) {
+if (i=="mass_5") return tmp.build[i].effect[key] ?? E(0) 
 		return tmp.build[i].effect[key] ?? def
 	},
 
