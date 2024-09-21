@@ -25,7 +25,7 @@ const ChargedUPGS = {
                 let x = E(1)
                 let y = E(1)
                 x=(BUILDINGS.eff("mass_5").add(1)).log2().pow(1.25).max(1)
-                y=x.max(1).div(3).pow(1.15).max(1)
+                y=x.max(1).div(3).pow(0.65).add(1)
                 return {eff:x,eff2:y}
             },
             effDesc() {return `<br><span style="color:green">Boosts object weight by `+formatMult(this.eff().eff)+`<br><span style="color:red">Increases lifting time by `+formatMult(this.eff().eff2)}
