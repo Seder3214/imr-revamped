@@ -37,7 +37,7 @@ const ChargedUPGS = {
                 let x = E(1)
                 let y = E(1)
                 x=tmp.massGain.root(35)
-                y=x.max(1).mul(3).pow(1.15).max(1)
+                y=x.mul(3).pow(1.15).max(1)
                 return {eff:x,eff2:y}
             },
             effDesc() {return `<br><span style="color:green">Decrease lifting time by `+formatMult(this.eff().eff)+`<br><span style="color:red">Increases exp requirement for next lvl by `+formatMult(this.eff().eff2)},
