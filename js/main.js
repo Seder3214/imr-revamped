@@ -86,8 +86,8 @@ const FORMS = {
         if (!hasElement(199) || CHALS.inChal(15)) x = x.mul(BUILDINGS.eff('tickspeed'))
         else x = x.pow(BUILDINGS.eff('tickspeed'))
 
-        if (player.ranks.tier.gte(2)) x = x.pow(1.15)
-        if (player.ranks.rank.gte(180)) x = x.pow(1.025)
+        if (player.ranks.tier.gte(2)) x = x.root(1.15)
+        if (player.ranks.rank.gte(180)) x = x.root(1.025)
         if (!CHALS.inChal(3) || CHALS.inChal(10) || FERMIONS.onActive("03")) x = x.pow(tmp.chal.eff[3])
         if (tmp.c16active || player.md.active || CHALS.inChal(10) || FERMIONS.onActive("02") || FERMIONS.onActive("03") || CHALS.inChal(11)) {
             x = expMult(x,tmp.md.pen)
