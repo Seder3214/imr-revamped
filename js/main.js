@@ -50,7 +50,7 @@ const FORMS = {
         return x
     },
     liftPower(y=player.liftingPower) {
-        let x = Decimal.pow(10,y.root(1.75).pow((player.liftingPower.gte(15)?1.15:1)).pow((player.liftingPower.gte(1e9)?1.65:1)).pow((player.liftingPower.gte(1e25)?1.25:1)).pow((player.liftingPower.gte(1e50)?1.5:1)).pow((player.liftingPower.gte(1e100)?1.425:1)).pow((player.liftingPower.gte(1e200)?1.225:1)))
+        let x = Decimal.pow(10,y.root(1.75).pow((player.liftingPower.gte(15)?1.035:1)).pow((player.liftingPower.gte(1e9)?1.65:1)).pow((player.liftingPower.gte(1e25)?1.25:1)).pow((player.liftingPower.gte(1e50)?1.5:1)).pow((player.liftingPower.gte(1e100)?1.425:1)).pow((player.liftingPower.gte(1e200)?1.225:1)))
         return x
     },
     expGain() {
