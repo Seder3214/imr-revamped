@@ -1,7 +1,8 @@
 const CONFIRMS_FUNCTION = {
     rage() {
-        player.rp.points = player.rp.points.add(tmp.rp.gain)
-        player.rp.unl = true
+        player.atom.points = player.atom.points.add(tmp.atom.gain)
+        player.atom.quarks = player.atom.quarks.add(tmp.atom.quarkGain)
+        player.atom.unl = true
         FORMS.rp.doReset()
 
         addQuote(2)
@@ -14,9 +15,8 @@ const CONFIRMS_FUNCTION = {
         addQuote(3)
     },
     atom() {
-        player.atom.points = player.atom.points.add(tmp.atom.gain)
-        player.atom.quarks = player.atom.quarks.add(tmp.atom.quarkGain)
-        player.atom.unl = true
+        player.rp.points = player.rp.points.add(tmp.rp.gain)
+        player.rp.unl = true
         ATOM.doReset()
 
         addQuote(4)

@@ -136,6 +136,7 @@ const RANKS = {
         rank: {
             '2'() {
                 let ret = player.build.mass_5.amt.div(12.3)
+                if (hascUpg(1)) ret = ret.add(player.build.mass_5.amt.mul(cUpgEff(1).eff3))
                 return ret
             },
             '3'() {
