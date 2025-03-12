@@ -47,24 +47,20 @@ const FORMS = {
     liftTime() {
         let x = E(3)
         if (hascUpg(0)) x = x.mul(cUpgEff(0).eff2)
-        if (hascUpg(1)) x = x.div(cUpgEff(1).eff)
         return x
     },
     liftPower(y=player.liftingPower) {
         let x = Decimal.pow(10,y.root(1.75).pow((player.liftingPower.gte(15)?1.035:1)).pow((player.liftingPower.gte(1e9)?1.65:1)).pow((player.liftingPower.gte(1e25)?1.25:1)).pow((player.liftingPower.gte(1e50)?1.5:1)).pow((player.liftingPower.gte(1e100)?1.425:1)).pow((player.liftingPower.gte(1e200)?1.225:1)))
-        if (hascUpg(1)) x = x.mul(cUpgEff(1).eff2)
         return x
     },
     expGain() {
         let x = E(2)
         x = x.add(BUILDINGS.eff('mass_1'))
-        x = x.mul(tmp.atom.particles[1].powerEffect.eff1)
         return x
     },
     LiftPowerEff() {
         let x = E(1)
         x=E(1.154).pow(player.liftingPower.pow(1.278))
-        x = x.mul(tmp.atom.particles[1].powerEffect.eff2)
         return x.max(1).softcap(100,0.405,0)
     },
     massGain() {
@@ -90,7 +86,7 @@ const FORMS = {
         if (!hasElement(199) || CHALS.inChal(15)) x = x.mul(BUILDINGS.eff('tickspeed'))
         else x = x.pow(BUILDINGS.eff('tickspeed'))
 
-        if (player.ranks.tier.gte(2)) x = x.pow(1/1.15)
+        if (player.ranks.tier.gte(2)) x = x.root(1.15)
         if (player.ranks.rank.gte(180)) x = x.root(1.025)
         if (!CHALS.inChal(3) || CHALS.inChal(10) || FERMIONS.onActive("03")) x = x.pow(tmp.chal.eff[3])
         if (tmp.c16active || player.md.active || CHALS.inChal(10) || FERMIONS.onActive("02") || FERMIONS.onActive("03") || CHALS.inChal(11)) {
@@ -416,6 +412,7 @@ const FORMS = {
             if (player.mainUpg.bh.includes(6)) gain = gain.mul(tmp.upgs.main?tmp.upgs.main[2][6].effect:E(1))
             if (hasTree("rp1")) gain = gain.mul(tmp.supernova.tree_eff.rp1)
 
+            if (!hasElement(105) && !hasElement(165)) gain = gain.mul(tmp.atom.particles[1].powerEffect.eff1)
             else gain = gain.pow(tmp.atom.particles[1].powerEffect.eff1)
 
             if (player.mainUpg.bh.includes(8)) gain = gain.pow(1.15)
@@ -434,7 +431,7 @@ const FORMS = {
             return gain.floor()
         },
         reset() {
-            if (tmp.atom.canReset) {
+            if (tmp.rp.can) {
                 if (player.confirms.rp) createConfirm("Are you sure you want to reset?",'rpReset',CONFIRMS_FUNCTION.rage)
                 else CONFIRMS_FUNCTION.rage()
             }
@@ -584,7 +581,6 @@ const FORMS = {
             for (let x = 0; x < player.mainUpg.rp.length; x++) if ([3,5,6].includes(player.mainUpg.rp[x])) keep.push(player.mainUpg.rp[x])
             if (!hasInfUpgrade(18)) player.mainUpg.rp = keep
             player.rp.points = E(0)
-            player.charged.upgs = []
             BUILDINGS.reset('tickspeed')
             BUILDINGS.reset('accelerator')
             player.bh.mass = E(0)

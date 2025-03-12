@@ -5,21 +5,6 @@ const RESOURCES_DIS = {
 
         desc: (gs)=>formatMass(player.mass)+"<br>"+formatMass(tmp.massGain.mul(BUILDINGS.eff("mass_5").add(1)))+"/lift | "+format(tmp.expGain)+" exp/lift"+"<br>("+formatTime(player.ticker)+"s / "+formatTime(tmp.liftTime)+"s to lift)",
     },
-    atom: {
-        unl: ()=>player.ranks.rank.gte(10)||player.atom.unl,
-        icon: "atom",
-
-        desc: (gs)=>format(player.atom.points,0)+"<br>"+(hasElement(24)?formatGain(player.atom.points,tmp.atom.gain.mul(gs)):"(+"+format(tmp.atom.gain,0)+")"),
-
-        resetBtn() { FORMS.rp.reset() },
-    },
-    quarks: {
-        unl: ()=>player.atom.unl,
-        icon: "quark",
-        class: "quark_color",
-
-        desc: (gs)=>format(player.atom.quarks,0)+"<br>"+(hasElement(14)?formatGain(player.atom.quarks,tmp.atom?tmp.atom.quarkGain.mul(tmp.atom.quarkGainSec).mul(gs):0):"(+"+format(tmp.atom.quarkGain,0)+")"),
-    },
     rp: {
         unl: ()=>true,
         icon: "rp",
@@ -44,6 +29,21 @@ const RESOURCES_DIS = {
         class: "yellow",
 
         desc: (gs)=>formatMass(player.bh.mass)+"<br>"+formatGain(player.bh.mass, tmp.bh.mass_gain.mul(gs), true),
+    },
+    atom: {
+        unl: ()=>player.bh.unl,
+        icon: "atom",
+
+        desc: (gs)=>format(player.atom.points,0)+"<br>"+(hasElement(24)?formatGain(player.atom.points,tmp.atom.gain.mul(gs)):"(+"+format(tmp.atom.gain,0)+")"),
+
+        resetBtn() { ATOM.reset() },
+    },
+    quarks: {
+        unl: ()=>player.atom.unl,
+        icon: "quark",
+        class: "quark_color",
+
+        desc: (gs)=>format(player.atom.quarks,0)+"<br>"+(hasElement(14)?formatGain(player.atom.quarks,tmp.atom?tmp.atom.quarkGain.mul(tmp.atom.quarkGainSec).mul(gs):0):"(+"+format(tmp.atom.quarkGain,0)+")"),
     },
     md: {
         unl: ()=>MASS_DILATION.unlocked(),

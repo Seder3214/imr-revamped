@@ -232,7 +232,7 @@ const BUILDINGS_DATA = {
         get isUnlocked() { return true },
         get autoUnlocked() { return true },
         get noSpend() { return false },
-        get beMultiplicative() { return hascUpg(2) },
+
         get res() { return player.mass },
         set res(v) { player.mass = v },
 
@@ -246,7 +246,7 @@ const BUILDINGS_DATA = {
                 
             let step = E(1)
             if (player.ranks.rank.gte(2)) step = step.add(RANKS.effect.rank[2]())
-                step = step.mul(tmp.atom.particles[0].powerEffect.eff2.add(1))
+
             let eff = step.mul(xx)
                 
             return {power: step, effect: eff}
@@ -254,8 +254,6 @@ const BUILDINGS_DATA = {
 
         get bonus() {
             let x = E(0)
-            if (hascUpg(2)) x = x.add(cUpgEff(2).eff)
-            if (player.atom.unl) x = x.add(tmp.atom.atomicEff||0)
             return x
         },
 
@@ -307,6 +305,7 @@ const BUILDINGS_DATA = {
             step = E(1.5)
             step = step.add(tmp.chal.eff[6])
             step = step.add(tmp.chal.eff[2])
+            step = step.add(tmp.atom.particles[0].powerEffect.eff2)
             if (player.ranks.tier.gte(4)) step = step.add(RANKS.effect.tier[4]())
             if (player.ranks.rank.gte(40)) step = step.add(RANKS.effect.rank[40]())
             step = step.mul(tmp.bosons.effect.z_boson[0])
@@ -351,6 +350,7 @@ const BUILDINGS_DATA = {
 
         get bonus() {
             let x = E(0)
+            if (player.atom.unl) x = x.add(tmp.atom.atomicEff||0)
             x = x.mul(getEnRewardEff(4))
             return x
         },

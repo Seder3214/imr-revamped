@@ -300,8 +300,6 @@ button {
 .cUpg.locked {
 	border-color: #444444;
 	cursor: default;
-	width: 350px;
-	height: 150px;
 }
 .cUpg:not(.locked):not(.bought):hover {
 	border-color: #47ff50;

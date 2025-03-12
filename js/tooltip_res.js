@@ -18,32 +18,6 @@ const TOOLTIP_RES = {
             return h
         },
     },
-    atom: {
-        full: "Atom",
-        desc() {
-            let h = `<i>
-            Reach over <b>${formatMass(1e15/1e21)}</b> mass to reset all previous features for gain Atoms & Quarks.
-            </i>`
-
-            return h
-        },
-    },
-    quarks: {
-        full: "Quark",
-        desc() {
-            let h = `You have <b>${format(player.atom.quarks,0)}</b> Quark.`;
-
-            if (tmp.overflowBefore.quark.gte(tmp.overflow_start.quark))
-            h += `<br>(<b>+${format(tmp.overflowBefore.quark,0)}</b> gained before <b>overflow</b>)`;
-
-            if (tmp.eaUnl) h += `
-            <br class='line'>
-            You have <b class='orange'>${tmp.exotic_atom.amount.format(0)}</b> Exotic Atoms.
-            `
-
-            return h
-        },
-    },
     rp: {
         full: "Rage Power",
         desc() {
@@ -83,6 +57,32 @@ const TOOLTIP_RES = {
             <br class='line'>You have <b class='cyan'>${player.atom.points.format(0)} ${player.atom.points.formatGain(tmp.atom.gain.mul(tmp.preQUGlobalSpeed))}</b> Atom. (after Quantum)
             `;
             */
+
+            return h
+        },
+    },
+    atom: {
+        full: "Atom",
+        desc() {
+            let h = `<i>
+            Reach over <b>${formatMass(uni(1e100))}</b> of black hole to reset all previous features for gain Atoms & Quarks.
+            </i>`
+
+            return h
+        },
+    },
+    quarks: {
+        full: "Quark",
+        desc() {
+            let h = `You have <b>${format(player.atom.quarks,0)}</b> Quark.`;
+
+            if (tmp.overflowBefore.quark.gte(tmp.overflow_start.quark))
+            h += `<br>(<b>+${format(tmp.overflowBefore.quark,0)}</b> gained before <b>overflow</b>)`;
+
+            if (tmp.eaUnl) h += `
+            <br class='line'>
+            You have <b class='orange'>${tmp.exotic_atom.amount.format(0)}</b> Exotic Atoms.
+            `
 
             return h
         },

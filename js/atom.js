@@ -1,7 +1,7 @@
 const ATOM = {
     gain() {
         if (CHALS.inChal(12)) return E(0)
-        let x = player.mass.div(1e15/1e21)
+        let x = player.bh.mass.div(player.mainUpg.br.includes(1)?1.5e156**0.5:1.5e156)
         if (x.lt(1)) return E(0)
         x = x.root(5)
         if (player.mainUpg.rp.includes(15)) x = x.mul(tmp.upgs.main?tmp.upgs.main[1][15].effect:E(1))
@@ -113,8 +113,7 @@ const ATOM = {
         },
         effect() {
             let base = hasElement(23)?1.5:1.75
-            let expBase= 0.35
-            let x = player.atom.atomic.max(1).log(base).pow(expBase).pow(getEnRewardEff(1))
+            let x = player.atom.atomic.max(1).log(base).pow(getEnRewardEff(1))
             if (!hasElement(75)) x = x.softcap(5e4,0.75,0).softcap(4e6,0.25,0)
 
             let w = 0.1 ** exoticAEff(0,4)
@@ -213,7 +212,7 @@ const ATOM = {
         },
         powerEffect: [
             x=>{
-                let a = hasPrestige(1,400) ? overflow(Decimal.pow(2,x.add(1).log10().add(1).log10().root(2)),10,0.5) : hasElement(198) ? x.add(1).log10().add(1).log10().div(10).add(1).pow(2) : hasElement(105) ? x.add(1).log10().add(1).log10().root(2).div(10).add(1) : x.add(1).log10().add(1).pow(2.05)
+                let a = hasPrestige(1,400) ? overflow(Decimal.pow(2,x.add(1).log10().add(1).log10().root(2)),10,0.5) : hasElement(198) ? x.add(1).log10().add(1).log10().div(10).add(1).pow(2) : hasElement(105) ? x.add(1).log10().add(1).log10().root(2).div(10).add(1) : x.add(1).pow(3)
                 let b = hasElement(29) ? x.add(1).log2().pow(1.25).mul(0.01) : x.add(1).pow(2.5).log2().mul(0.01)
 
                 // if (hasPrestige(1,400)) a = overflow(a,1e100,0.5)
@@ -221,15 +220,15 @@ const ATOM = {
                 return {eff1: a, eff2: b}
             },
             x=>{
-                let a = hasPrestige(1,400) ? overflow(Decimal.pow(2,x.add(1).log10().add(1).log10().root(2)),10,0.5) : hasElement(198) ? x.add(1).log10().add(1).log10().div(10).add(1).pow(2) : hasElement(105) ? x.add(1).log10().add(1).log10().root(2).div(10).add(1) : x.add(1).log(20).add(1).pow(1.25)
+                let a = hasPrestige(1,400) ? overflow(Decimal.pow(2,x.add(1).log10().add(1).log10().root(2)),10,0.5) : hasElement(198) ? x.add(1).log10().add(1).log10().div(10).add(1).pow(2) : hasElement(105) ? x.add(1).log10().add(1).log10().root(2).div(10).add(1) : x.add(1).pow(2)
                 let b = hasUpgrade('atom',18)
                 ?Decimal.pow(1.1,
-                    player.atom.atomic.add(1).log10().add(10).log10().mul(x.add(1).log10().add(10).log10()).root(3).sub(1)
+                    player.rp.points.add(1).log10().add(10).log10().mul(x.add(1).log10().add(10).log10()).root(3).sub(1)
                 )
                 .mul(player.mass.add(1).log10().add(10).log10())
                 :(hasElement(19)
-                ?player.mass.max(1).log10().add(1).pow(player.atom.atomic.max(1).log(10).mul(x.max(1).log(10)).root(2.75))
-                :player.mass.max(1).root(1.025).add(1).pow(player.atom.atomic.max(1).log10().mul(x.max(1).log10()).root(10))).min('ee200')
+                ?player.mass.max(1).log10().add(1).pow(player.rp.points.max(1).log(10).mul(x.max(1).log(10)).root(2.75))
+                :player.mass.max(1).log10().add(1).pow(player.rp.points.max(1).log(100).mul(x.max(1).log(100)).root(3))).min('ee200')
 
                 if (CHALS.inChal(17) && !hasUpgrade('atom',18)) b = E(1)
 
@@ -249,12 +248,12 @@ const ATOM = {
         ],
         desc: [
             x=>{ return `
-                Boost object weight by ${hasElement(105)?"^"+format(x.eff1):format(x.eff1)+"x"}<br><br>
-                Increases Overcount Power by ${format(x.eff2.mul(100))}%
+                Boost Mass gain by ${hasElement(105)?"^"+format(x.eff1):format(x.eff1)+"x"}<br><br>
+                Increases Tickspeed Power by ${format(x.eff2.mul(100))}%
             ` },
             x=>{ return `
-                Boost experience gain by ${hasElement(105)?"^"+format(x.eff1):format(x.eff1)+"x"}<br><br>
-                Boost lifting power effect based on Atomic Power - ${hasUpgrade('atom',18)?"^"+format(x.eff2):format(x.eff2)+"x"}<br><br>
+                Boost Rage Power gain by ${hasElement(105)?"^"+format(x.eff1):format(x.eff1)+"x"}<br><br>
+                Boost Mass gain based on Rage Powers - ${hasUpgrade('atom',18)?"^"+format(x.eff2):format(x.eff2)+"x"}<br><br>
             ` },
             x=>{ return `
                 Boost Dark Matter gain by ${hasElement(105)?"^"+format(x.eff1):format(x.eff1)+"x"}<br><br>
